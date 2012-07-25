@@ -1,8 +1,16 @@
 #!/bin/sh
 
-set -x && \
-mkdir -p config && \
-aclocal && \
-libtoolize --force --copy && \
-automake --foreign --add-missing --copy && \
+set -e
+set -x
+mkdir -p config
+aclocal
+
+UNAME=`uname`
+if [ "$UNAME" == "Darwin" ]; then
+        glibtoolize --force --copy
+else
+        libtoolize --force --copy
+fi
+
+automake --foreign --add-missing --copy
 autoconf
