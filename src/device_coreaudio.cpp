@@ -128,7 +128,7 @@ namespace audiere {
     void* ptr;
     AudioBuffer *curBuffer;
 
-    for (unsigned int currentBuffer = 0; currentBuffer < ioData->mNumberBuffers; currentBuffer++)
+    for (unsigned int currentBuffer = 0; currentBuffer < ioData->mNumberBuffers; currentBuffer++) {
         curBuffer = &ioData->mBuffers[currentBuffer];
         remaining = curBuffer->mDataByteSize;
         ptr = curBuffer->mData;
