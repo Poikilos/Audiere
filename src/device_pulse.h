@@ -1,10 +1,9 @@
 #ifndef DEVICE_PULSE_H
 #define DEVICE_PULSE_H
 
-
+#include <pulse/simple.h>
 #include "audiere.h"
 #include "device_mixer.h"
-
 
 namespace audiere {
 
@@ -13,7 +12,7 @@ namespace audiere {
     static PulseAudioDevice* create(const ParameterList& parameters);
 
   private:
-    PulseAudioDevice(int output_device);
+    PulseAudioDevice(std::string& description);
     ~PulseAudioDevice();
 
   public:
@@ -21,7 +20,8 @@ namespace audiere {
     const char* ADR_CALL getName();
 
   private:
-    int m_output_device;
+    struct pa_simple *m_sp;
+    struct pa_sample_spec m_ss;
   };
 
 }

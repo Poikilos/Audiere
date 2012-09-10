@@ -194,7 +194,13 @@ AM_CONDITIONAL(HAVE_ALSA, test "x$HAVE_ALSA" = "xtrue")
 
 AC_CHECK_HEADER(pulse/simple.h,
     HAVE_PULSE=true
-    AC_DEFINE(HAVE_PULSE))
+    AC_DEFINE(HAVE_PULSE)
+    LIBS="-lpulse-simple $LIBS"
+    EXTRA_LIBS="-lpulse-simple $EXTRA_LIBS"
+  ,
+    AC_MSG_WARN([Could not find pulse header.  You do not appear to have libpulse installed.])
+    AC_MSG_WARN([Disabling Pulse Audio support.])
+    AC_DEFINE(NO_PULSE))
 AM_CONDITIONAL(HAVE_PULSE, test "x$HAVE_PULSE" = "xtrue")
 
 AC_CHECK_HEADER(vorbis/vorbisfile.h,
