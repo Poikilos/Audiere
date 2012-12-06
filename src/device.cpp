@@ -190,7 +190,7 @@ namespace audiere {
       "al:SGI AL"  ";"
 #endif
 #ifdef HAVE_PA
-      "pa:portaudo compatible"  ";"
+      "pa:portaudio compatible"  ";"
 #endif
 #ifdef HAVE_CORE_AUDIO
       "coreaudio:Core Audio (Mac OS X)"  ";"
