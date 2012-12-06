@@ -45,7 +45,7 @@ namespace audiere {
         SetWindowLongPtr(m_window, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
         #else
         SetWindowLong(m_window, GWL_USERDATA, reinterpret_cast<LONG>(this));
-        #else
+        #endif
       } else {
         ADR_LOG("MCI notification window creation failed");
       }
