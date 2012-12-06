@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="winmm.lib rpcrt4.lib dumbd_static.lib libFLAC_static_d.lib libFLAC++_static_d.lib libspeexd.lib ogg_static_d.lib vorbis_static_d.lib vorbisfile_static_d.lib"
+				AdditionalDependencies="winmm.lib rpcrt4.lib dumbd_static.lib libFLAC_static_d.lib libspeexd.lib ogg_static_d.lib vorbis_static_d.lib vorbisfile_static_d.lib"
 				OutputFile="$(OutDir)/audiere.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../third-party/vc6/lib"
@@ -140,7 +140,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="winmm.lib rpcrt4.lib dumb_static.lib libFLAC_static.lib libFLAC++_static.lib libspeex.lib ogg_static.lib vorbis_static.lib vorbisfile_static.lib"
+				AdditionalDependencies="winmm.lib rpcrt4.lib dumb_static.lib libFLAC_static.lib libspeex.lib ogg_static.lib vorbis_static.lib vorbisfile_static.lib"
 				OutputFile="$(OutDir)/audiere.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../third-party/vc6/lib"
