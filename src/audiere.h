@@ -31,6 +31,7 @@
 #include <cstring>
 
 #ifdef _MSC_VER
+#pragma warning(push)
 #pragma warning(disable : 4786)
 #endif
 
@@ -1592,5 +1593,8 @@ namespace audiere {
 
 }
 
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 #endif
