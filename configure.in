@@ -28,6 +28,24 @@ AC_ARG_ENABLE(opt,
     CFLAGS="$CFLAGS -O2"
     CXXFLAGS="$CXXFLAGS -O2")
 
+AC_ARG_ENABLE(macsdl,
+    AC_HELP_STRING(--enable-macsdl, build with SDL output module),
+    CFLAGS="-I/Library/Frameworks/SDL.framework/Headers $CFLAGS"
+    CXXFLAGS="-I/Library/Frameworks/SDL.framework/Headers $CXXFLAGS"
+    LIBS="-framework SDL  $LIBS"
+    EXTRA_LIBS="-framework SDL  $LIBS"
+    HAVE_SDL=true
+    AC_DEFINE(HAVE_SDL))
+
+AC_ARG_ENABLE(sdl,
+    AC_HELP_STRING(--enable-sdl, build with unix SDL output module),
+    CFLAGS="`sdl-config --cflags` $CFLAGS"
+    CXXFLAGS="`sdl-config --cflags` $CXXFLAGS"
+    LIBS="`sdl-config --libs`  $LIBS"
+    EXTRA_LIBS="`sdl-config --libs`  $LIBS"
+    HAVE_SDL=true
+    AC_DEFINE(HAVE_SDL))
+
 dnl Checks for programs.
 
 AC_PROG_CC
@@ -74,6 +92,8 @@ fi
 if test "x$GCC" = "xyes" ; then
    CFLAGS="$CFLAGS -Wall -Wno-non-virtual-dtor"
 fi
+
+AM_CONDITIONAL(HAVE_SDL, test "x$HAVE_SDL" = "xtrue")
 
 dnl Look for pthreads
 if test "x$win32" = "xno";then

@@ -36,6 +36,10 @@
   #include "device_al.h"
 #endif
 
+#ifdef HAVE_SDL
+  #include "device_sdl.h"
+#endif
+
 #ifdef HAVE_DSOUND
   #include "device_ds.h"
 #endif
@@ -167,6 +171,9 @@ namespace audiere {
 #ifdef HAVE_ALSA
       "alsa:Advanced Linux Sound Architecture"  ";"
 #endif
+#ifdef HAVE_SDL
+      "sdl:Simple Direct Media sound device" ";"
+#endif
 #ifdef HAVE_OSS
       "oss:Open Sound System"  ";"
 #endif
@@ -248,6 +255,7 @@ namespace audiere {
         TRY_GROUP("al");
         TRY_GROUP("directsound");
         TRY_GROUP("winmm");
+        TRY_GROUP("sdl");
         TRY_GROUP("pulse");
         TRY_GROUP("oss");
         TRY_GROUP("portaudio");
@@ -268,7 +276,14 @@ namespace audiere {
           return 0;
         }
       #endif
-      
+
+      #ifdef HAVE_SDL
+        if (name == "sdl") {
+          TRY_DEVICE(SDLAudioDevice);
+          return 0;
+        }
+      #endif
+
       #ifdef HAVE_PULSE
         if (name == "pulse") {
           TRY_DEVICE(PulseAudioDevice);
