@@ -89,7 +89,7 @@ namespace audiere {
     const int read = m_file->read(buffer, bytes_to_read);
     const int frames_read = read / frame_size;
 
-#if WORDS_BIGENDIAN
+#if defined(WORDS_BIGENDIAN) || defined(__BIG_ENDIAN__)
     if (m_sample_format == SF_S16) {
       // make little endian into host endian
       u8* out = (u8*)buffer;

@@ -111,7 +111,7 @@ namespace audiere {
         break;
       }
 
-#ifdef WORDS_BIGENDIAN
+#if defined(WORDS_BIGENDIAN) || defined(__BIG_ENDIAN__)
 #define ENDIANNESS 1
 #else
 #define ENDIANNESS 0
