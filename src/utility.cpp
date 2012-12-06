@@ -2,7 +2,7 @@
 #pragma warning(disable : 4786)
 #endif
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <windows.h>
 #endif
 
@@ -90,7 +90,7 @@ namespace audiere {
   }
 
 
-#ifdef WIN32
+#ifdef _WIN32
 
   ADR_EXPORT(long) AdrAtomicIncrement(volatile long& var) {
     return InterlockedIncrement(&var);

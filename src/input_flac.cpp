@@ -221,7 +221,7 @@ namespace audiere {
   FLAC__StreamDecoderReadStatus FLACInputStream::read_callback(
     const FLAC__StreamDecoder* decoder,
     FLAC__byte buffer[],
-    unsigned *bytes,
+    size_t *bytes,
     void* client_data)
   {
     *bytes = getFile(client_data)->read(buffer, *bytes);

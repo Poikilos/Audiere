@@ -1,4 +1,4 @@
-#include <string.h>
+#include <string>
 #include "debug.h"
 #include "input_wav.h"
 #include "utility.h"

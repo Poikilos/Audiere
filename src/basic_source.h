@@ -3,7 +3,7 @@
 
 
 #include <vector>
-#include <string>
+#include <string.h>
 #include "audiere.h"
 
 

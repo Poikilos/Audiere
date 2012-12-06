@@ -6,7 +6,8 @@
 
 #ifndef NO_MPAUDEC
 
-#include <string.h>
+#include <string>
+
 #include "input_mp3.h"
 #include "utility.h"
 #include "debug.h"

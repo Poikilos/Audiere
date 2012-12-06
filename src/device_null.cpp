@@ -33,11 +33,13 @@ namespace audiere {
   void
   NullAudioDevice::update() {
     ADR_GUARD("NullAudioDevice::update");
-    SYNCHRONIZED(this);
+    {
+      SYNCHRONIZED(this);
 
-    StreamList::iterator i = m_streams.begin();
-    for (; i != m_streams.end(); ++i) {
-      (*i)->update();
+      StreamList::iterator i = m_streams.begin();
+      for (; i != m_streams.end(); ++i) {
+        (*i)->update();
+      }
     }
 
     AI_Sleep(50);

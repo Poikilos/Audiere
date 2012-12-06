@@ -3,7 +3,7 @@
  * since AIFF and WAV files are so alike.
  */
 
-#include <string.h>
+#include <string>
 #include "debug.h"
 #include "input_aiff.h"
 #include "utility.h"

@@ -28,6 +28,10 @@
   #include "device_oss.h"
 #endif
 
+#ifdef HAVE_PULSE
+  #include "device_pulse.h"
+#endif
+
 #ifdef HAVE_AL
   #include "device_al.h"
 #endif
@@ -166,6 +170,9 @@ namespace audiere {
 #ifdef HAVE_OSS
       "oss:Open Sound System"  ";"
 #endif
+#ifdef HAVE_PULSE
+      "pulse: PulseAudio"  ";"
+#endif
 #ifdef HAVE_DSOUND
       "directsound:DirectSound (high-performance)"  ";"
 #endif
@@ -241,6 +248,7 @@ namespace audiere {
         TRY_GROUP("al");
         TRY_GROUP("directsound");
         TRY_GROUP("winmm");
+        TRY_GROUP("pulse");
         TRY_GROUP("oss");
         TRY_GROUP("portaudio");
         TRY_GROUP("coreaudio");
@@ -257,6 +265,13 @@ namespace audiere {
       #ifdef HAVE_OSS
         if (name == "oss") {
           TRY_DEVICE(OSSAudioDevice);
+          return 0;
+        }
+      #endif
+      
+      #ifdef HAVE_PULSE
+        if (name == "pulse") {
+          TRY_DEVICE(PulseAudioDevice);
           return 0;
         }
       #endif

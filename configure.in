@@ -38,6 +38,8 @@ AC_PROG_MAKE_SET
 AC_LIBTOOL_WIN32_DLL dnl Must be called before AC_PROG_LIBTOOL
 AM_PROG_LIBTOOL
 
+LT_INIT
+
 dnl We test with C++ libraries, so use the C++ compiler...
 AC_LANG(C++)
 
@@ -58,6 +60,8 @@ case $host in
     core_audio=yes;
     ;;
 esac
+
+AM_CONDITIONAL(HAVE_WXWINDOWS, false)
 
 AM_CONDITIONAL(WIN32, test "x$win32" = "xyes")
 AM_CONDITIONAL(HAVE_CORE_AUDIO, test "x$core_audio" = "xyes")
@@ -81,7 +85,7 @@ if test "x$win32" = "xno";then
 fi
 
 dnl Look for FLAC
-AC_CHECK_LIB(FLAC, FLAC__seekable_stream_decoder_process_single,
+AC_CHECK_LIB(FLAC, FLAC__stream_decoder_process_single,
     LIBS="-lFLAC -lm $LIBS"
     EXTRA_LIBS="-lFLAC -lm $EXTRA_LIBS"
     HAVE_FLAC=true
@@ -180,12 +184,24 @@ AM_CONDITIONAL(HAVE_OSS, test "x$HAVE_OSS" = "xtrue")
 
 AC_HEADER_STDC
 AC_CHECK_HEADER(unistd.h)
+
 AC_CHECK_HEADER(alsa/asoundlib.h,
     HAVE_ALSA=true
     LIBS="-lasound $LIBS"
     EXTRA_LIBS="-lasound $EXTRA_LIBS"
     AC_DEFINE(HAVE_ALSA))
 AM_CONDITIONAL(HAVE_ALSA, test "x$HAVE_ALSA" = "xtrue")
+
+AC_CHECK_HEADER(pulse/simple.h,
+    HAVE_PULSE=true
+    AC_DEFINE(HAVE_PULSE)
+    LIBS="-lpulse-simple $LIBS"
+    EXTRA_LIBS="-lpulse-simple $EXTRA_LIBS"
+  ,
+    AC_MSG_WARN([Could not find pulse header.  You do not appear to have libpulse installed.])
+    AC_MSG_WARN([Disabling Pulse Audio support.])
+    AC_DEFINE(NO_PULSE))
+AM_CONDITIONAL(HAVE_PULSE, test "x$HAVE_PULSE" = "xtrue")
 
 AC_CHECK_HEADER(vorbis/vorbisfile.h,
     HAVE_OGG=true

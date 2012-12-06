@@ -39,6 +39,12 @@ else
 OSS_DIST    = device_oss.cpp device_oss.h
 endif
 
+if HAVE_PULSE
+PULSE_SOURCES = device_pulse.cpp device_pulse.h
+else
+PULSE_DIST    = device_pulse.cpp device_pulse.h
+endif
+
 if HAVE_ALSA
 ALSA_SOURCES = device_alsa.cpp device_alsa.h
 else
@@ -115,7 +121,7 @@ endif
 EXTRA_DIST = \
 	$(LIBCDAUDIO_DIST) $(WINCDAUDIO_DIST) $(NULLCDAUDIO_DIST) \
 	$(FLAC_DIST) $(DUMB_DIST) $(OGG_DIST) $(SPEEX_DIST) $(AL_DIST) \
-	$(OSS_DIST) $(DSOUND_DIST) $(WINMM_DIST) $(MIDI_DIST)
+	$(OSS_DIST) $(PULSE_DIST) $(DSOUND_DIST) $(WINMM_DIST) $(MIDI_DIST) $(COREAUDIO_DIST) $(PA_DIST)
 
 libaudiere_la_SOURCES = \
 	$(MIDI_SOURCES) \
@@ -136,6 +142,7 @@ libaudiere_la_SOURCES = \
 	device_null.h \
 	$(AL_SOURCES) \
 	$(OSS_SOURCES) \
+	$(PULSE_SOURCES) \
 	$(ALSA_SOURCES) \
 	$(PA_SOURCES) \
 	$(WINMM_SOURCES) \
