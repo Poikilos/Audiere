@@ -43,7 +43,7 @@
 
 // DLLs in Windows should use the standard (Pascal) calling convention
 #ifndef ADR_CALL
-  #if defined(WIN32) || defined(_WIN32)
+  #if defined(_WIN32)
     #define ADR_CALL __stdcall
   #else
     #define ADR_CALL
@@ -52,7 +52,7 @@
 
 // Export functions from the DLL
 #ifndef ADR_DECL
-#  if defined(WIN32) || defined(_WIN32)
+#  if defined(_WIN32)
 #    ifdef AUDIERE_EXPORTS
 #      define ADR_DECL __declspec(dllexport)
 #    else
