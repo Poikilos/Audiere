@@ -417,7 +417,7 @@ namespace audiere {
         ADR_LOG("arg is not valid");
       }
 
-      ThreadedDevice* This = (ThreadedDevice*)arg;
+      ThreadedDevice* This = static_cast<ThreadedDevice*>(arg);
       This->run();
     }
 
