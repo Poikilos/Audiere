@@ -132,7 +132,7 @@ namespace audiere {
       }
 
       // read what we've got!
-      const int to_read = std::min(
+      const int to_read = (std::min)(
         frame_count - frames_read,
         m_buffer.getSize() / frame_size);
       m_buffer.read(out, to_read * frame_size);

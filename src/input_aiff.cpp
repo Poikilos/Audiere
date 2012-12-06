@@ -82,7 +82,7 @@ namespace audiere {
       return 0;
     }
 
-    const int frames_to_read = std::min(frame_count, m_frames_left_in_chunk);
+    const int frames_to_read = (std::min)(frame_count, m_frames_left_in_chunk);
     const int frame_size = m_channel_count * GetSampleSize(m_sample_format);
     const int bytes_to_read = frames_to_read * frame_size;
 
