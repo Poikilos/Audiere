@@ -11,13 +11,17 @@
 #include "internal.h"
 #include "threads.h"
 
-#ifdef _MSC_VER
-
+#ifdef _WIN32
   #include <windows.h>
-  #include <mmsystem.h>
-  #include "device_ds.h"
-  #include "device_mm.h"
+#endif
 
+#ifdef HAVE_WINMM
+  #include <mmsystem.h>
+  #include "device_mm.h"
+#endif
+
+#ifdef HAVE_DSOUND
+  #include "device_ds.h"
 #endif
 
 #ifdef HAVE_ALSA
@@ -224,7 +228,7 @@ namespace audiere {
   {
     ADR_GUARD("DoOpenDevice");
 
-    #ifdef _MSC_VER
+    #ifdef _WIN32
 
       if (name == "" || name == "autodetect") {
         TRY_GROUP("directsound");
@@ -232,15 +236,19 @@ namespace audiere {
         return 0;
       }
 
+      #ifdef HAVE_DSOUND
       if (name == "directsound") {
         TRY_DEVICE(DSAudioDevice);
         return 0;
       }
+      #endif
 
+      #ifdef HAVE_WINMM
       if (name == "winmm") {
         TRY_DEVICE(MMAudioDevice);
         return 0;
       }
+      #endif
 
       if (name == "null") {
         TRY_DEVICE(NullAudioDevice);
