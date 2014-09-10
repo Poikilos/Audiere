@@ -63,14 +63,20 @@ endif()
 # Codecs
 if(USE_DUMB)
 	list(APPEND SOURCES input_mod.cpp input_mod.h)
+else()
+	add_definitions(-DNO_DUMB)
 endif()
 
 if(USE_FLAC)
 	list(APPEND SOURCES input_flac.cpp input_flac.h)
+else()
+	add_definitions(-DNO_FLAC)
 endif()
 
 if(USE_OGG)
 	list(APPEND SOURCES input_ogg.cpp input_ogg.h)
+else()
+	add_definitions(-DNO_OGG)
 endif()
 
 if(USE_SPEEX)
@@ -79,6 +85,8 @@ if(USE_SPEEX)
 		input_speex.h
 		speexfile/speexfile.cpp
 		speexfile/speexfile.h)
+else()
+	add_definitions(-DNO_SPEEX)
 endif()
 
 # MIDI
@@ -152,6 +160,7 @@ if(USE_WINMM)
 	list(APPEND LIBS winmm)
 endif()
 
+# Possible other defines: NO_MP3 and NO_MPAUDEC
 
 # env.Append(CCFLAGS=['/EHsc', '/Z7', '/O2', '/W3'],
 # LINKFLAGS=['/DEBUG'],
