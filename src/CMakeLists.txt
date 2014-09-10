@@ -114,6 +114,8 @@ endif()
 
 if(USE_ALSA)
 	add_definitions(-DHAVE_ALSA)
+	include_directories(${ALSA_INCLUDE_DIRS})
+	list(APPEND LIBS ${ALSA_LIBS})
 	list(APPEND SOURCES device_alsa.cpp device_alsa.h)
 endif()
 

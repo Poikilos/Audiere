@@ -4,25 +4,53 @@ cmake_minimum_required(VERSION 2.8.5)
 # Set package properties
 project(audiere)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(OptionRequires)
+# All options:
+#USE_DUMB
+#USE_FLAC
+#USE_LIBCDAUDIO
+#USE_OGG
+#USE_SPEEX
+
+#USE_AL
+#USE_ALSA
+#USE_COREAUDIO
+#USE_DSOUND
+#USE_PA
+#USE_PULSE
+#USE_SDL
+#USE_OSS
+#USE_WINMM
+
 if(WIN32)
-	option(USE_DSOUND "Use DirectSound backend" ON)
-	option(USE_WINMM "Use WinMM backend" ON)
+	# TODO
+	# search for dsound
 elseif(APPLE)
-	option(USE_COREAUDIO "Use the CoreAudio backend" ON)
+	# TODO
+	# search for coreaudio
 else()
-	option(USE_ALSA "Use the ALSA backend" ON)
-	option(USE_PULSE "Use PulseAudio backend" ON)
-	option(USE_OSS "Use OSS backend" ON)
+    find_package(ALSA)
+	# TODO
+	# search for pulseaudio
+	# search for oss
 endif()
 
-# vorbis (HAVE_OGG/NO_OGG)
-# FLAC
-# libdumb - linux only
-# libspeex
+# TODO search for: dumb, flac, ogg, speex
+if(NOT WIN32)
+	# TODO
+	# search for libcdaudio
+endif()
 
-# defines:
-# dsound: HAVE_DSOUND or NO_DSOUND
-# oss: HAVE_OSS or NO_OSS
+option_requires(USE_AL "Use the OpenAL backend" AL_FOUND) #TODO
+option_requires(USE_ALSA "Use the ALSA backend" ALSA_FOUND)
+option_requires(USE_COREAUDIO "Use the CoreAudio backend" COREAUDIO_FOUND) #TODO
+option_requires(USE_DSOUND "Use DirectSound backend" DIRECTSOUND_FOUND) #TODO
+option_requires(USE_PA "Use PortAudio backend" PA_FOUND) #TODO
+option_requires(USE_PULSE "Use PulseAudio backend" PULSE_FOUND) #TODO
+option_requires(USE_SDL "Use SDL backend" SDL_FOUND) #TODO
+option_requires(USE_OSS "Use OSS backend" OSS_FOUND) #TODO
+option_requires(USE_WINMM "Use WinMM backend" WIN32)
 
 include_directories(src)
 
