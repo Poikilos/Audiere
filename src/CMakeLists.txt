@@ -1,3 +1,5 @@
+set(LIBS)
+set(API audiere.h)
 set(SOURCES
 	basic_source.cpp
 	basic_source.h
@@ -46,8 +48,7 @@ set(SOURCES
 	utility.h
 	version.cpp)
 
-set(API audiere.h)
-
+# Timer/threads
 if(WIN32)
 	list(APPEND SOURCES
 		timer_win32.cpp
@@ -158,6 +159,14 @@ endif()
 # CPPPATH=['#/third-party/vc6/include'],
 # LIBPATH=['#/third-party/vc6/lib'],
 # LIBS=['user32', 'ole32', 'rpcrt4', 'winmm'])
+
+# Platform-specific definitions
+if(MSVC)
+	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+endif()
+if(WIN32)
+	add_definitions(-DWIN32_LEAN_AND_MEAN -DNOMINMAX)
+endif()
 
 add_definitions(-DAUDIERE_EXPORTS)
 add_library(audiere SHARED ${SOURCES} ${API})
