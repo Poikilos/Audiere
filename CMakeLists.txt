@@ -35,12 +35,14 @@ else()
     find_package(ALSA)
 	# TODO
 	# search for oss
-	# search for pulseaudio
+	find_package(PulseAudio QUIET) # Installs a cmake module.
 endif()
 
 # TODO
 # AL is for SGI
 # search for pa, sdl
+set(SDL_BUILDING_LIBRARY ON)
+find_package(SDL)
 
 # TODO search for: dumb, flac, ogg, speex
 if(NOT WIN32)
@@ -53,8 +55,8 @@ option_requires(USE_ALSA "Use the ALSA backend" ALSA_FOUND)
 option_requires(USE_COREAUDIO "Use the CoreAudio backend" COREAUDIO_FOUND) #TODO
 option_requires(USE_DSOUND "Use DirectSound backend" DIRECTSOUND_FOUND) #TODO
 option_requires(USE_PA "Use PortAudio backend" PA_FOUND) #TODO
-option_requires(USE_PULSE "Use PulseAudio backend" PULSE_FOUND) #TODO
-option_requires(USE_SDL "Use SDL backend" SDL_FOUND) #TODO
+option_requires(USE_PULSE "Use PulseAudio backend" PULSEAUDIO_FOUND)
+option_requires(USE_SDL "Use SDL backend" SDL_FOUND)
 option_requires(USE_OSS "Use OSS backend" OSS_FOUND) #TODO
 option_requires(USE_WINMM "Use WinMM backend" WIN32)
 
