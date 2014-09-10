@@ -39,6 +39,7 @@ else()
 endif()
 
 # TODO
+# AL is for SGI
 # search for pa, sdl
 
 # TODO search for: dumb, flac, ogg, speex
@@ -47,7 +48,7 @@ if(NOT WIN32)
 	# search for libcdaudio
 endif()
 
-option_requires(USE_AL "Use the OpenAL backend" AL_FOUND) #TODO
+option_requires(USE_AL "Use the SGI AL backend" AL_FOUND) #TODO
 option_requires(USE_ALSA "Use the ALSA backend" ALSA_FOUND)
 option_requires(USE_COREAUDIO "Use the CoreAudio backend" COREAUDIO_FOUND) #TODO
 option_requires(USE_DSOUND "Use DirectSound backend" DIRECTSOUND_FOUND) #TODO
