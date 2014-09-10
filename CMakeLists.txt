@@ -23,6 +23,7 @@ include(OptionRequires)
 #USE_OSS
 #USE_WINMM
 
+set(OTHER_NIX FALSE)
 if(WIN32)
 	# TODO
 	# search for dsound
@@ -30,11 +31,15 @@ elseif(APPLE)
 	# TODO
 	# search for coreaudio
 else()
+	set(OTHER_NIX TRUE)
     find_package(ALSA)
 	# TODO
-	# search for pulseaudio
 	# search for oss
+	# search for pulseaudio
 endif()
+
+# TODO
+# search for pa, sdl
 
 # TODO search for: dumb, flac, ogg, speex
 if(NOT WIN32)
@@ -51,6 +56,19 @@ option_requires(USE_PULSE "Use PulseAudio backend" PULSE_FOUND) #TODO
 option_requires(USE_SDL "Use SDL backend" SDL_FOUND) #TODO
 option_requires(USE_OSS "Use OSS backend" OSS_FOUND) #TODO
 option_requires(USE_WINMM "Use WinMM backend" WIN32)
+
+if(NOT WIN32)
+	mark_as_advanced(USE_DSOUND USE_WINMM)
+endif()
+if(NOT APPLE)
+	mark_as_advanced(USE_COREAUDIO)
+endif()
+if(NOT OTHER_NIX)
+	mark_as_advanced(USE_ALSA USE_OSS USE_PULSE)
+endif()
+if(WIN32)
+	mark_as_advanced(USE_LIBCDAUDIO)
+endif()
 
 include_directories(src)
 
