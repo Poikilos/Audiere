@@ -92,7 +92,7 @@ if(WIN32)
     endif()
     if(USE_BUNDLED_DX9SDK)
         set(DIRECTSOUND_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/third-party/DX9SDK/Include")
-        set(DIRECTSOUND_LIBRARIES "${CMAKE_CURRENT_SOURCE_DIR}/third-party/DX9SDK/Lib/dsound.lib")
+        set(DIRECTSOUND_LIBRARIES "${CMAKE_CURRENT_SOURCE_DIR}/third-party/DX9SDK/Lib/dsound.lib" rpcrt4)
         set(DIRECTSOUND_FOUND true)
     endif()
 
