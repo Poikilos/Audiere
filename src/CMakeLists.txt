@@ -61,30 +61,39 @@ else()
 endif()
 
 # Codecs
-if(USE_DUMB)
+if(USE_CODEC_MOD)
 	list(APPEND SOURCES input_mod.cpp input_mod.h)
 else()
 	add_definitions(-DNO_DUMB)
 endif()
 
-if(USE_FLAC)
+if(USE_CODEC_FLAC)
+    include_directories(${LIBFLAC_INCLUDE_DIRS})
 	list(APPEND SOURCES input_flac.cpp input_flac.h)
+	list(APPEND LIBS ${LIBFLAC_LIBRARIES})
+	if(USE_CODEC_FLAC_STATIC)
+	    add_definitions(-DFLAC__NO_DLL)
+    endif()
 else()
 	add_definitions(-DNO_FLAC)
 endif()
 
-if(USE_OGG)
+if(USE_CODEC_OGG)
+    include_directories(${LIBOGG_INCLUDE_DIRS} ${LIBVORBIS_INCLUDE_DIRS})
 	list(APPEND SOURCES input_ogg.cpp input_ogg.h)
+	list(APPEND LIBS ${LIBOGG_LIBRARIES} ${LIBVORBIS_LIBRARIES})
 else()
 	add_definitions(-DNO_OGG)
 endif()
 
 if(USE_SPEEX)
+    include_directories(${LIBSPEEX_INCLUDE_DIRS})
 	list(APPEND SOURCES
 		input_speex.cpp
 		input_speex.h
 		speexfile/speexfile.cpp
 		speexfile/speexfile.h)
+	list(APPEND LIBS ${LIBSPEEX_LIBRARIES})
 else()
 	add_definitions(-DNO_SPEEX)
 endif()
