@@ -111,7 +111,7 @@ option_requires(USE_WINMM "Use WinMM backend" WIN32)
 option_requires(USE_CODEC_MOD "Use the MOD codec (DUMB library)" DUMB_FOUND) #TODO
 option_requires(USE_CODEC_FLAC "Use the FLAC codec" LIBFLAC_FOUND)
 option_requires(USE_CODEC_SPEEX "Use the Speex codec" LIBSPEEX_FOUND)
-option_requires(USE_CODEC_OGG "Use the Ogg Vorbis codec" LIBOGG_FOUND LIBVORBIS)
+option_requires(USE_CODEC_OGG "Use the Ogg Vorbis codec" LIBOGG_FOUND LIBVORBIS_FOUND)
 
 option_requires(USE_CODEC_FLAC_STATIC "Use the FLAC codec, as a static library" USE_CODEC_FLAC ${FLAC_STATIC_OFF_BY_DEFAULT_FLAG})
 
