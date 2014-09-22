@@ -62,7 +62,9 @@ endif()
 
 # Codecs
 if(USE_CODEC_MOD)
+	include_directories(${DUMB_INCLUDE_DIRS})
 	list(APPEND SOURCES input_mod.cpp input_mod.h)
+	list(APPEND LIBS ${DUMB_LIBRARIES})
 else()
 	add_definitions(-DNO_DUMB)
 endif()
