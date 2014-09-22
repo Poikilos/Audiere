@@ -88,7 +88,7 @@ namespace audiere {
     char d = tolower(*b);
     return (c - d);
   }
-#ifdef __GNUC__
+#if defined(__GNUC__) && ! defined(_WIN32)
 #  include <features.h>
 #  if __GNUC_PREREQ(4,1)
 #    define ADR_HAVE_GCC_ATOMIC_INTRINSICS
