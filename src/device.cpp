@@ -198,22 +198,19 @@ namespace audiere {
       "null:Null output (no sound)"  ;
   }
 
-
-  #define NEED_SEMICOLON do ; while (false)
-
-  #define TRY_GROUP(group_name) {                               \
-    AudioDevice* device = DoOpenDevice(group_name, parameters); \
+  #define TRY_RECURSE(NAME) do {                                \
+    AudioDevice* device = DoOpenDevice(NAME, parameters);       \
     if (device) {                                               \
       return device;                                            \
     }                                                           \
-  } NEED_SEMICOLON
+  } while (0)
 
-  #define TRY_DEVICE(DeviceType) {                         \
+  #define TRY_DEVICE(DeviceType) do {                      \
     DeviceType* device = DeviceType::create(parameters);   \
     if (device) {                                          \
       return device;                                       \
     }                                                      \
-  } NEED_SEMICOLON
+  } while (0)
 
 
   AudioDevice* DoOpenDevice(
@@ -225,8 +222,8 @@ namespace audiere {
     #ifdef _WIN32
 
       if (name == "" || name == "autodetect") {
-        TRY_GROUP("directsound");
-        TRY_GROUP("winmm");
+        TRY_RECURSE("directsound");
+        TRY_RECURSE("winmm");
         return 0;
       }
 
@@ -253,15 +250,15 @@ namespace audiere {
 
       if (name == "" || name == "autodetect") {
         // in decreasing order of sound API quality
-        TRY_GROUP("alsa");
-        TRY_GROUP("al");
-        TRY_GROUP("directsound");
-        TRY_GROUP("winmm");
-        TRY_GROUP("sdl");
-        TRY_GROUP("pulse");
-        TRY_GROUP("oss");
-        TRY_GROUP("portaudio");
-        TRY_GROUP("coreaudio");
+        TRY_RECURSE("alsa");
+        TRY_RECURSE("al");
+        TRY_RECURSE("directsound");
+        TRY_RECURSE("winmm");
+        TRY_RECURSE("sdl");
+        TRY_RECURSE("pulse");
+        TRY_RECURSE("oss");
+        TRY_RECURSE("portaudio");
+        TRY_RECURSE("coreaudio");
         return 0;
       }
 
