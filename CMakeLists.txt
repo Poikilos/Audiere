@@ -45,6 +45,12 @@ set(SDL_BUILDING_LIBRARY ON)
 find_package(SDL)
 
 # TODO search for: dumb, flac, ogg, speex
+# libflac++-dev installs flac++.pc
+# libflac-dev installs flac.pc
+# libogg-dev installs ogg.pc
+# libvorbis-dev installs vorbis.pc and vorbisfile.pc both of which we need
+# libspeex-dev installs speex.pc
+
 if(NOT WIN32)
 	# TODO
 	# search for libcdaudio
