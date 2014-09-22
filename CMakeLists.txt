@@ -70,7 +70,7 @@ if(WIN32)
     endif()
     if(USE_BUNDLED_LIBFLAC)
         set(LIBFLAC_INCLUDE_DIRS "${bundle_include}")
-        set(LIBFLAC_LIBRARIES optimized "${bundle_libs}/libFLAC_static.lib" debug "${bundle_libs}/libFLACd_static.lib")
+        set(LIBFLAC_LIBRARIES optimized "${bundle_libs}/libFLAC_static.lib" debug "${bundle_libs}/libFLAC_static_d.lib")
         set(FLAC_STATIC_OFF_BY_DEFAULT_FLAG) # Bundled is static!
         set(LIBFLAC_FOUND true)
     endif()
