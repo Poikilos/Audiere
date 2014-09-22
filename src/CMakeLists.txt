@@ -135,6 +135,8 @@ endif()
 
 if(USE_DSOUND)
 	add_definitions(-DHAVE_DSOUND)
+	include_directories(${DIRECTSOUND_INCLUDE_DIRS})
+	list(APPEND LIBS ${DIRECTSOUND_LIBRARIES})
 	list(APPEND SOURCES
 		device_ds.cpp
 		device_ds.h
