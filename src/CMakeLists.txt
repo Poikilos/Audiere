@@ -60,46 +60,6 @@ else()
 		threads_posix.cpp)
 endif()
 
-# Codecs
-if(USE_CODEC_MOD)
-	include_directories(${DUMB_INCLUDE_DIRS})
-	list(APPEND SOURCES input_mod.cpp input_mod.h)
-	list(APPEND LIBS ${DUMB_LIBRARIES})
-else()
-	add_definitions(-DNO_DUMB)
-endif()
-
-if(USE_CODEC_FLAC)
-    include_directories(${LIBFLAC_INCLUDE_DIRS})
-	list(APPEND SOURCES input_flac.cpp input_flac.h)
-	list(APPEND LIBS ${LIBFLAC_LIBRARIES})
-	if(USE_CODEC_FLAC_STATIC)
-	    add_definitions(-DFLAC__NO_DLL)
-    endif()
-else()
-	add_definitions(-DNO_FLAC)
-endif()
-
-if(USE_CODEC_OGG)
-    include_directories(${LIBOGG_INCLUDE_DIRS} ${LIBVORBIS_INCLUDE_DIRS})
-	list(APPEND SOURCES input_ogg.cpp input_ogg.h)
-	list(APPEND LIBS ${LIBOGG_LIBRARIES} ${LIBVORBIS_LIBRARIES})
-else()
-	add_definitions(-DNO_OGG)
-endif()
-
-if(USE_SPEEX)
-    include_directories(${LIBSPEEX_INCLUDE_DIRS})
-	list(APPEND SOURCES
-		input_speex.cpp
-		input_speex.h
-		speexfile/speexfile.cpp
-		speexfile/speexfile.h)
-	list(APPEND LIBS ${LIBSPEEX_LIBRARIES})
-else()
-	add_definitions(-DNO_SPEEX)
-endif()
-
 # MIDI
 if(USE_WINMM)
 	list(APPEND SOURCES midi_mci.cpp mci_device.h)
@@ -116,27 +76,79 @@ else()
 	list(APPEND SOURCES cd_null.cpp)
 endif()
 
+###
+# Codecs
+###
+set(INPUT_DEFINES)
 
+# Possible other defines: NO_MP3 and NO_MPAUDEC
+
+if(USE_CODEC_MOD)
+	include_directories(${DUMB_INCLUDE_DIRS})
+	list(APPEND SOURCES input_mod.cpp input_mod.h)
+	list(APPEND LIBS ${DUMB_LIBRARIES})
+else()
+	list(APPEND INPUT_DEFINES NO_DUMB)
+endif()
+
+if(USE_CODEC_FLAC)
+    include_directories(${LIBFLAC_INCLUDE_DIRS})
+	list(APPEND SOURCES input_flac.cpp input_flac.h)
+	list(APPEND LIBS ${LIBFLAC_LIBRARIES})
+	if(USE_CODEC_FLAC_STATIC)
+	    add_definitions(-DFLAC__NO_DLL)
+    endif()
+else()
+	list(APPEND INPUT_DEFINES NO_FLAC)
+endif()
+
+if(USE_CODEC_OGG)
+    include_directories(${LIBOGG_INCLUDE_DIRS} ${LIBVORBIS_INCLUDE_DIRS})
+	list(APPEND SOURCES input_ogg.cpp input_ogg.h)
+	list(APPEND LIBS ${LIBOGG_LIBRARIES} ${LIBVORBIS_LIBRARIES})
+else()
+	list(APPEND INPUT_DEFINES NO_OGG)
+endif()
+
+if(USE_SPEEX)
+    include_directories(${LIBSPEEX_INCLUDE_DIRS})
+	list(APPEND SOURCES
+		input_speex.cpp
+		input_speex.h
+		speexfile/speexfile.cpp
+		speexfile/speexfile.h)
+	list(APPEND LIBS ${LIBSPEEX_LIBRARIES})
+else()
+	list(APPEND INPUT_DEFINES NO_SPEEX)
+endif()
+
+# Set preprocessor flags for input codecs
+set_property(SOURCE input.cpp PROPERTY COMPILE_DEFINITIONS ${INPUT_DEFINES})
+
+###
 # Devices
+###
+set(DEVICE_DEFINES)
+
 if(USE_AL)
-	add_definitions(-DHAVE_AL)
+	list(APPEND DEVICE_DEFINES HAVE_AL)
 	list(APPEND SOURCES device_al.cpp device_al.h)
 endif()
 
 if(USE_ALSA)
-	add_definitions(-DHAVE_ALSA)
+	list(APPEND DEVICE_DEFINES HAVE_ALSA)
 	include_directories(${ALSA_INCLUDE_DIRS})
 	list(APPEND LIBS ${ALSA_LIBS})
 	list(APPEND SOURCES device_alsa.cpp device_alsa.h)
 endif()
 
 if(USE_COREAUDIO)
-	add_definitions(-DHAVE_CORE_AUDIO)
+	list(APPEND DEVICE_DEFINES HAVE_CORE_AUDIO)
 	list(APPEND SOURCES device_coreaudio.cpp device_coreaudio.h)
 endif()
 
 if(USE_DSOUND)
-	add_definitions(-DHAVE_DSOUND)
+	list(APPEND DEVICE_DEFINES HAVE_DSOUND)
 	include_directories(${DIRECTSOUND_INCLUDE_DIRS})
 	list(APPEND LIBS ${DIRECTSOUND_LIBRARIES})
 	list(APPEND SOURCES
@@ -150,45 +162,41 @@ if(USE_DSOUND)
 endif()
 
 if(USE_OSS)
-	add_definitions(-DHAVE_OSS)
+	list(APPEND DEVICE_DEFINES HAVE_OSS)
 	list(APPEND SOURCES device_oss.cpp device_oss.h)
 endif()
 
 if(USE_PA)
-	add_definitions(-DHAVE_PA)
+	list(APPEND DEVICE_DEFINES HAVE_PA)
 	list(APPEND SOURCES device_pa.cpp device_pa.h)
 endif()
 
 if(USE_PULSE)
-	add_definitions(-DHAVE_PULSE)
+	list(APPEND DEVICE_DEFINES HAVE_PULSE)
 	list(APPEND SOURCES device_pulse.cpp device_pulse.h)
 	include_directories(${PULSEAUDIO_INCLUDE_DIRS})
 	list(APPEND LIBS ${PULSEAUDIO_LIBRARY})
 endif()
 
 if(USE_SDL)
-	add_definitions(-DHAVE_SDL)
+	list(APPEND DEVICE_DEFINES HAVE_SDL)
 	list(APPEND SOURCES device_sdl.cpp device_sdl.h)
 	include_directories(${SDL_INCLUDE_DIR})
 	list(APPEND LIBS ${SDL_LIBRARY})
 endif()
 
 if(USE_WINMM)
-	add_definitions(-DHAVE_WINMM)
+	list(APPEND DEVICE_DEFINES HAVE_WINMM)
 	list(APPEND SOURCES device_mm.cpp device_mm.h midi_mci.cpp)
 	list(APPEND LIBS winmm)
 endif()
 
-# Possible other defines: NO_MP3 and NO_MPAUDEC
+# Set preprocessor flags for output devices
+set_property(SOURCE device.cpp PROPERTY COMPILE_DEFINITIONS ${DEVICE_DEFINES})
 
-# env.Append(CCFLAGS=['/EHsc', '/Z7', '/O2', '/W3'],
-# LINKFLAGS=['/DEBUG'],
-# CPPDEFINES=['AUDIERE_EXPORTS', 'NOMINMAX', 'FLAC__NO_DLL', '_CRT_SECURE_NO_WARNINGS', 'WIN32'],
-# CPPPATH=['#/third-party/vc6/include'],
-# LIBPATH=['#/third-party/vc6/lib'],
-# LIBS=['user32', 'ole32', 'rpcrt4', 'winmm'])
-
+###
 # Platform-specific definitions
+###
 if(MSVC)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()
@@ -197,5 +205,6 @@ if(WIN32)
 endif()
 
 add_definitions(-DAUDIERE_EXPORTS)
+
 add_library(audiere SHARED ${SOURCES} ${API})
 target_link_libraries(audiere ${LIBS})
