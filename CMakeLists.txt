@@ -87,7 +87,7 @@ if(WIN32)
     if(USE_BUNDLED_LIBVORBIS)
         set(LIBVORBIS_INCLUDE_DIRS "${bundle_include}")
         set(LIBVORBIS_LIBRARIES optimized "${bundle_libs}/vorbis_static.lib" debug "${bundle_libs}/vorbis_static_d.lib"
-            release "${bundle_libs}/vorbisfile_static.lib" debug "${bundle_libs}/vorbisfile_static_d.lib")
+            optimized "${bundle_libs}/vorbisfile_static.lib" debug "${bundle_libs}/vorbisfile_static_d.lib")
         set(LIBVORBIS_FOUND true)
     endif()
     if(USE_BUNDLED_DX9SDK)
