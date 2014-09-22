@@ -405,7 +405,7 @@ namespace audiere {
   }
 
   void
-  MP3InputStream::ID3v2Parse(u8* buf, int len, u8 version, u8 flags)
+  MP3InputStream::ID3v2Parse(u8* /*buf*/, int len, u8 /*version*/, u8 /*flags*/)
   {
     // skips the ID3v2 frame.
     // the maximium of frame length is 16M.
