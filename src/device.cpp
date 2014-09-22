@@ -168,10 +168,6 @@ namespace audiere {
 
   ADR_EXPORT(const char*) AdrGetSupportedAudioDevices() {
     return
-#ifdef _MSC_VER
-      "directsound:DirectSound (high-performance)"  ";"
-      "winmm:Windows Multimedia (compatible)"  ";"
-#else
 #ifdef HAVE_ALSA
       "alsa:Advanced Linux Sound Architecture"  ";"
 #endif
@@ -198,8 +194,6 @@ namespace audiere {
 #endif
 #ifdef HAVE_CORE_AUDIO
       "coreaudio:Core Audio (Mac OS X)"  ";"
-#endif
-
 #endif
       "null:Null output (no sound)"  ;
   }
