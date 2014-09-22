@@ -205,12 +205,7 @@ namespace audiere {
     }                                                           \
   } while (0)
 
-  #define TRY_DEVICE(DeviceType) do {                      \
-    DeviceType* device = DeviceType::create(parameters);   \
-    if (device) {                                          \
-      return device;                                       \
-    }                                                      \
-  } while (0)
+  #define MAKE_DEVICE(DeviceType) (DeviceType::create(parameters))
 
 
   AudioDevice* DoOpenDevice(
@@ -219,118 +214,77 @@ namespace audiere {
   {
     ADR_GUARD("DoOpenDevice");
 
-    #ifdef _WIN32
+    if (name == "" || name == "autodetect") {
+      // in decreasing order of sound API quality
+      TRY_RECURSE("alsa");
+      TRY_RECURSE("al");
+      TRY_RECURSE("directsound");
+      TRY_RECURSE("winmm");
+      TRY_RECURSE("sdl");
+      TRY_RECURSE("pulse");
+      TRY_RECURSE("oss");
+      TRY_RECURSE("portaudio");
+      TRY_RECURSE("coreaudio");
+      return 0;
+    }
 
-      if (name == "" || name == "autodetect") {
-        TRY_RECURSE("directsound");
-        TRY_RECURSE("winmm");
-        return 0;
+    #ifdef HAVE_ALSA
+      if (name == "alsa") {
+        return MAKE_DEVICE(ALSAAudioDevice);
       }
-
-      #ifdef HAVE_DSOUND
-      if (name == "directsound") {
-        TRY_DEVICE(DSAudioDevice);
-        return 0;
-      }
-      #endif
-
-      #ifdef HAVE_WINMM
-      if (name == "winmm") {
-        TRY_DEVICE(MMAudioDevice);
-        return 0;
-      }
-      #endif
-
-      if (name == "null") {
-        TRY_DEVICE(NullAudioDevice);
-        return 0;
-      }
-
-    #else  // not Win32 - assume autoconf UNIX
-
-      if (name == "" || name == "autodetect") {
-        // in decreasing order of sound API quality
-        TRY_RECURSE("alsa");
-        TRY_RECURSE("al");
-        TRY_RECURSE("directsound");
-        TRY_RECURSE("winmm");
-        TRY_RECURSE("sdl");
-        TRY_RECURSE("pulse");
-        TRY_RECURSE("oss");
-        TRY_RECURSE("portaudio");
-        TRY_RECURSE("coreaudio");
-        return 0;
-      }
-
-      #ifdef HAVE_ALSA
-        if (name == "alsa") {
-          TRY_DEVICE(ALSAAudioDevice);
-          return 0;
-        }
-      #endif
-
-      #ifdef HAVE_OSS
-        if (name == "oss") {
-          TRY_DEVICE(OSSAudioDevice);
-          return 0;
-        }
-      #endif
-
-      #ifdef HAVE_SDL
-        if (name == "sdl") {
-          TRY_DEVICE(SDLAudioDevice);
-          return 0;
-        }
-      #endif
-
-      #ifdef HAVE_PULSE
-        if (name == "pulse") {
-          TRY_DEVICE(PulseAudioDevice);
-          return 0;
-        }
-      #endif
-
-      #ifdef HAVE_DSOUND
-        if (name == "directsound") {
-          TRY_DEVICE(DSAudioDevice);
-          return 0;
-        }
-      #endif
-
-      #ifdef HAVE_WINMM
-        if (name == "winmm") {
-          TRY_DEVICE(MMAudioDevice);
-          return 0;
-        }
-      #endif
-
-      #ifdef HAVE_AL
-        if (name == "al") {
-          TRY_DEVICE(ALAudioDevice);
-          return 0;
-        }
-      #endif
-
-      #ifdef HAVE_PA
-	if (name == "portaudio") {
-          TRY_DEVICE(PAAudioDevice);
-          return 0;
-	}
-      #endif
-
-      #ifdef HAVE_CORE_AUDIO
-	if (name == "coreaudio") {
-          TRY_DEVICE(CAAudioDevice);
-          return 0;
-	}
-      #endif
-
-      if (name == "null") {
-        TRY_DEVICE(NullAudioDevice);
-        return 0;
-      }
-
     #endif
+
+    #ifdef HAVE_OSS
+      if (name == "oss") {
+        return MAKE_DEVICE(OSSAudioDevice);
+      }
+    #endif
+
+    #ifdef HAVE_SDL
+      if (name == "sdl") {
+        return MAKE_DEVICE(SDLAudioDevice);
+      }
+    #endif
+
+    #ifdef HAVE_PULSE
+      if (name == "pulse") {
+        return MAKE_DEVICE(PulseAudioDevice);
+      }
+    #endif
+
+    #ifdef HAVE_DSOUND
+      if (name == "directsound") {
+        return MAKE_DEVICE(DSAudioDevice);
+      }
+    #endif
+
+    #ifdef HAVE_WINMM
+      if (name == "winmm") {
+        return MAKE_DEVICE(MMAudioDevice);
+      }
+    #endif
+
+    #ifdef HAVE_AL
+      if (name == "al") {
+        return MAKE_DEVICE(ALAudioDevice);
+      }
+    #endif
+
+    #ifdef HAVE_PA
+      if (name == "portaudio") {
+        return MAKE_DEVICE(PAAudioDevice);
+      }
+    #endif
+
+    #ifdef HAVE_CORE_AUDIO
+      if (name == "coreaudio") {
+        return MAKE_DEVICE(CAAudioDevice);
+      }
+    #endif
+
+    if (name == "null") {
+      return MAKE_DEVICE(NullAudioDevice);
+    }
 
     // no devices
     return 0;
