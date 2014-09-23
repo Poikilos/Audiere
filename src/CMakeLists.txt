@@ -48,6 +48,11 @@ set(SOURCES
 	utility.h
 	version.cpp)
 
+# Resource file
+if(WIN32)
+	list(APPEND SOURCES
+		audiere.rc)
+endif()
 # Timer/threads
 if(WIN32)
 	list(APPEND SOURCES
