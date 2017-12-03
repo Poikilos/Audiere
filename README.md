@@ -7,10 +7,10 @@ I only made this modernized fork since I wrote a whole sound implementation base
 see doc/tutorial.txt
 
 ## Compiling
-see also doc/release-howto.txt
-
-If you don't have libdumb (as expected):
+* see also doc/release-howto.txt
+* If you don't have libdumb (as expected):
 `scons use_dumb=no`
+* there is a script called runme_before_automake you should use when appropriate to make sure license, changelog, and other files used by automake are intact and up-to-date with the latest information from doc folder and license file
 
 ## Changes
 see doc/changelog.txt
