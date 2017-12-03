@@ -7,9 +7,9 @@
 #endif
 
 #include <ctype.h>
+#include <cstdio>
 #include "utility.h"
 #include "internal.h"
-#include <stdio.h>
 
 
 namespace audiere {

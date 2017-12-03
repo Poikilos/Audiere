@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string>
-
+#include <cstdlib>
 
 namespace audiere {
 

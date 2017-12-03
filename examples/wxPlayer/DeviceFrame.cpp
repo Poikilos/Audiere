@@ -57,7 +57,7 @@ END_EVENT_TABLE()
 
 
 DeviceFrame::DeviceFrame(audiere::AudioDevicePtr device)
-: wxMDIParentFrame(0, -1, wxT("Audio Device - The right one"),
+: wxMDIParentFrame(0, -1, wxT("Audio Device - " + CStr2wxString( device->getName() )),
                    wxDefaultPosition, wxSize(400, 500))
 {
   m_device = device;

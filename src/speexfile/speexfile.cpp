@@ -889,7 +889,7 @@ void *speexfile::header_to_decoder ( SpeexHeader *header, int enh_enabled, int *
     modeID = header->mode;
     if ( forceMode != -1 )
         modeID = forceMode;
-    mode = speex_mode_list[modeID];
+    mode = const_cast<SpeexMode*>(speex_mode_list[modeID]);
 
     if ( mode->bitstream_version < header->mode_bitstream_version ) {
         strcpy ( speex_last_error, "The file was encoded with a newer version of Speex.\nYou need to upgrade in order to play it." );
