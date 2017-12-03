@@ -3,3 +3,9 @@ Matt Campbell   http://pobox.com/~mattcampbell/
 Jacky Chong     http://www.livejournal.com/users/darklich/
 Theo Reed       http://surreality.us:8080/~rizen/
 Ben Scott       http://www.vrac.iastate.edu/~bscott/
+Thomas Preece   http://tpreece.net/git/audiere.git
+kg              https://github.com/kg/Audiere
+flibitijibibo   https://github.com/flibitijibibo/Audiere
+vancegroup      https://github.com/vancegroup/Audiere
+allencch (AUR)  https://aur.archlinux.org/packages/audiere/
+expertmm        https://github.com/expertmm/Audiere

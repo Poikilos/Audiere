@@ -1,6 +1,7 @@
 You can get the latest source code for Audiere via SourceForge's anonymous
-CVS.  Simply press enter at the password prompt.
+CVS (old 2011 version) at audiere.sourceforge.net.
+#Simply press enter at the password prompt.
 
-export CVSROOT=:pserver:anonymous@cvs.audiere.sourceforge.net:/cvsroot/audiere
-cvs login
-cvs -z3 co audiere
+#export CVSROOT=:pserver:anonymous@cvs.audiere.sourceforge.net:/cvsroot/audiere
+#cvs login
+#cvs -z3 co audiere
