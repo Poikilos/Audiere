@@ -3,8 +3,6 @@
 #endif
 
 #include "debug.h"
-#include "stdlib.h"
-
 #include <cstdlib>
 
 namespace audiere {
