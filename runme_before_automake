@@ -1,15 +1,24 @@
 #!/bin/sh
 if [ ! -f NEWS ]; then echo "https://github.com/expertmm/Audiere" > NEWS; fi
-if [ ! -f README ]; then
-  if [ -f README.md ]; then
-    cat README.md > README
-  fi
-else
-  echo "# Audiere" > README
-  echo "expertmm fork of vancegroup fork" > README
-fi
-if [ ! -f AUTHORS ]; then cat doc/authors.txt > AUTHORS; fi
-if [ ! -f ChangeLog ]; then cat doc/changelog.txt > ChangeLog; fi
+
+#if [ ! -f README ]; then
+#  if [ -f README.md ]; then
+#    cat ln -s README.md README
+#  fi
+#else
+#  echo "# Audiere" > README
+#  echo "expertmm fork of vancegroup fork" > README
+#fi
+if [ ! -f README ]; then ln -s README.md README; fi
+
+#if [ ! -f AUTHORS ]; then cat doc/authors.txt > AUTHORS; fi
+if [ ! -f AUTHORS ]; then ln -s doc/authors.txt AUTHORS; fi
+
+
+#if [ ! -f ChangeLog ]; then cat doc/changelog.txt > ChangeLog; fi
+if [ ! -f ChangeLog ]; then ln -s doc/changelog.txt ChangeLog; fi
 
 # automake --add-missing will add a COPYING file, but let's not do that.
-if [ ! -f COPYING ]; then cat doc/license.txt > COPYING; fi
+#if [ ! -f COPYING ]; then cat doc/license.txt > COPYING; fi
+#if [ ! -f COPYING ]; then cat LICENSE > COPYING; fi
+if [ ! -f COPYING ]; then ln -s LICENSE COPYING; fi

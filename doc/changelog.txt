@@ -2,6 +2,8 @@
 
   expertmm's fork started at https://github.com/expertmm/Audiere from https://github.com/vancegroup/Audiere
   
+  moved license from doc/license.txt to LICENSE (so shows up on GitHub interface and is immediately visible)
+  
   made changes suggested by autoconf:
   * add "AC_CONFIG_MACRO_DIRS([m4])" to configure.ac
   * add "ACLOCAL_AMFLAGS = -I m4" to Makefile.am
