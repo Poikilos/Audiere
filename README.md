@@ -4,6 +4,7 @@ This fork is based on vancegroup's fork of Chad Austin's Audiere (see "Reasons f
 I only made these changes out of desparation, since I wrote a whole backend based on it before finding out it was deprecated.
 
 ## Changes
+* (2017-12-03) configure.in should be configure.ac nowadays, to avoid extension inconsistency and/or theoretical name collisions
 * (2017-12-03) ensured that all audiere-svn (last updated 2011) changes were applied to this fork:
 	* src/basic_source.h: changed (regression) `<string.h>` to `<string>`
 	* src/debug.cpp: removed `"stdlib.h"` (already had `<cstdlib>` like svn 2011 does)
@@ -64,6 +65,5 @@ I only made these changes out of desparation, since I wrote a whole backend base
 * latest GitHub fork was 2014 and didn't work with wx 3 (the later SethRobinson fork doesn't count--it only made changes for MSVC 32-bit & 64-bit compilation, and didn't fork from vancegroup who had done many fixes).
 
 ## Known issues
-* configure.in should be configure.ac nowadays, to avoid extension inconsistency and/or theoretical name collisions
 * possible type-o in device_null.h (see "old changes noted during diffs" above)
 * requires oss (or emulation of /dev/dsp via alsa-oss) which is deprecated
