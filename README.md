@@ -1,30 +1,34 @@
 # Audiere
-Audiere is deprecated and in maintenance-only. If you need a Windows build, you can use SethRobinson Windows binaries.
+If you need a Windows build, you can use SethRobinson Windows binaries.
 This fork is based on vancegroup's fork of Chad Austin's Audiere (see "Reasons for Fork" below).
-I only made this modernized fork since I wrote a whole sound implementation based on it before finding out that the linux package was based on the (VERY) old and deprecated sourceforge release version 1.9.4.
+I only made this modernized fork since I wrote a whole sound implementation based on it before finding out that the linux package was based on the (VERY) old and deprecated sourceforge release version 1.9.4. However, maybe this will bring the project back to life, as there are several others on GitHub (and AUR) doing some great work on Audiere (so far, the only central location for that work is here).
+
 
 ## Usage
 * see doc/tutorial.txt
-* for Code::Blocks notes, see HowTo-expertmm-WIP.txt
+* for Code::Blocks notes, see HowTo-expertmm.md
+
 
 ## Compiling
 * see also doc/release-howto.txt
 * see also examples/wxPlayer/IMPORTANT.txt
-* for compiling on *nix/*bsd/MacOS, see HowTo-expertmm-WIP.txt for now
-* If you want to use scons and you don't have libdumb (as expected):
+* for compiling on *nix/*bsd/MacOS, see HowTo-expertmm.md for now
+* If you want to use scons on non-Windows platform (not recommended) and you don't have libdumb (as expected):
 `scons use_dumb=no`
 	* NOTE: using scons will cause so file's name to not have -1.9.4 appended, resulting in programs not running. You would then have to manually rename or link to it and put it in your system with something like `LD_LIBRARY_PATH=/usr/local/lib/libaudiere-1.9.4.so && ldconfig`
-* there is a script called runme_before_automake you should use when appropriate to make sure license, changelog, and other files used by automake are intact and up-to-date with the latest information from doc folder and license file
 
 
 ## Changes
 see doc/changelog.txt
-  
+
+
 ## Dependencies
 see doc/dependencies.txt
 
+
 ### Optional Dependencies
 * alsa-oss (to emulate oss since oss is deprecated--alsa-oss creates /dev/dsp, which Audiere release or AUR version need in order to create a sound device--otherwise Audiere will output an error to the console saying /dev/dsp is missing): this should be optional now because <https://github.com/vancegroup/Audiere> version has alsa support (from svn 2011 version) and pulse support
+
 
 ## Reasons for Fork
 * last sourceforge release was 2006
