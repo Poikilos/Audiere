@@ -36,8 +36,10 @@ This method avoids scons completely--however, sudo make install doesn't put the 
 * first install all your build tools used below
 * open terminal
 * cd to wherever you put the project such as `cd $HOME/Documents/GitHub/Audiere`
-* do the following:
+* paste the following into terminal (excluding triple grave accents if you are using a text editor that sees them):
+
 ```
+chmod +x runme_before_automake
 ./runme_before_automake
 libtoolize
 aclocal  # scans configure.ac and create an aclocal.m4 file 
@@ -53,7 +55,7 @@ automake --add-missing
 #               src/Makefile.am:25: but option 'subdir-objects' is disabled
 # * speex is only included if present on your system, so you may have to remove it to use this howto until issue is resolved.
 autoreconf
-#autoreconf --install  # (generates Makefile.in)
+autoreconf --install  # (generates Makefile.in)
 autoconf  # (generates configure script)
 ./configure
 make
