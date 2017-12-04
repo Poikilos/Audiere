@@ -8,9 +8,13 @@ see doc/tutorial.txt
 
 ## Compiling
 * see also doc/release-howto.txt
-* If you don't have libdumb (as expected):
+* see also examples/wxPlayer/IMPORTANT.txt
+* for compiling on *nix/*bsd/MacOS, see HowTo-expertmm-WIP.txt for now
+* If you want to use scons and you don't have libdumb (as expected):
 `scons use_dumb=no`
+	* NOTE: using scons will cause so file's name to not have -1.9.4 appended, resulting in programs not running. You would then have to manually rename or link to it and put it in your system with something like `LD_LIBRARY_PATH=/usr/local/lib/libaudiere-1.9.4.so && ldconfig`
 * there is a script called runme_before_automake you should use when appropriate to make sure license, changelog, and other files used by automake are intact and up-to-date with the latest information from doc folder and license file
+
 
 ## Changes
 see doc/changelog.txt
@@ -27,6 +31,7 @@ see doc/dependencies.txt
 * <https://aur.archlinux.org/packages/audiere> was last updated 2015 and has some patches that should be added in some central (non-OS-specific) location
 * On the feature request to support alsa at <https://sourceforge.net/p/audiere/feature-requests/67/> (noting that at the time, oss was already all but deprecated), anonymous replied "Whatever, patches welcome"--that was in 2007. In svn, also code is availale (see HAS_ALSA define in code, such as device.cpp; coreaudio and pa are also conditionally included there).
 * latest GitHub fork was 2014 and didn't work with wx 3 (the later SethRobinson fork doesn't count--it only made changes for MSVC 32-bit & 64-bit compilation, and didn't fork from vancegroup who had done many fixes).
+	* and isn't cross-platform
 
 ## Known issues
 * CMakeLists.txt has many TODOs that seem important, such as:

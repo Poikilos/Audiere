@@ -140,7 +140,7 @@ wxString DeviceFrame::GetSoundFile() {
 
   return wxFileSelector(
     wxT("Select a sound file"), wxT(""), wxT(""), wxT(""),
-    CStr2wxString(wildcards.c_str()), wxOPEN, this);
+    CStr2wxString(wildcards.c_str()), wxFC_OPEN, this);
 }
 
 

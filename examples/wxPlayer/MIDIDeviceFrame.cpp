@@ -68,7 +68,7 @@ void MIDIDeviceFrame::OnDeviceOpenSong(wxCommandEvent&) {
     wxT("Select a MIDI file"), wxT(""), wxT(""), wxT(""),
    wxT( "MIDI Files (*.midi,*.mid,*.rmi)|*.midi;*.mid;*.rmi|")
     wxT("All Files (*.*)|*.*"),
-    wxOPEN, this);
+    wxFC_OPEN, this);
   if (!file.empty()) {
     audiere::MIDIStreamPtr stream = m_device->openStream(wxString2CStr(file));
     if (!stream) {
