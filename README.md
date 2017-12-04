@@ -4,7 +4,8 @@ This fork is based on vancegroup's fork of Chad Austin's Audiere (see "Reasons f
 I only made this modernized fork since I wrote a whole sound implementation based on it before finding out that the linux package was based on the (VERY) old and deprecated sourceforge release version 1.9.4.
 
 ## Usage
-see doc/tutorial.txt
+* see doc/tutorial.txt
+* for Code::Blocks notes, see HowTo-expertmm-WIP.txt
 
 ## Compiling
 * see also doc/release-howto.txt
@@ -44,3 +45,19 @@ see doc/dependencies.txt
 * implement fixes for MSVC 32-bit & 64-bit compilation implemented in SethRobinson's fork of https://github.com/kg/Audiere (should have been forked from later fork but wasn't so full diff must be manually applied to current fork)
 * possible type-o in device_null.h (see "old changes noted during diffs" above)
 * requires oss (or emulation of /dev/dsp via alsa-oss) which is deprecated
+
+
+## Developer Notes
+
+`SOUND_BUFFERS` is 15
+`SOUND_SOURCES` is 20
+
+Unicode filenames require an external library such as wx (the following is from <https://github.com/kg/Audiere/blob/master/examples/wxPlayer/DeviceFrame.cpp>):
+```C++
+#if wxUSE_UNICODE
+  wxCharBuffer buffFilename = filename.mb_str(wxConvUTF8);
+  audiere::SampleSourcePtr source = audiere::OpenSampleSource(buffFilename.data());
+#else
+  audiere::SampleSourcePtr source = audiere::OpenSampleSource(filename);
+#endif
+```

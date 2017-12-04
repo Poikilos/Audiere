@@ -11,33 +11,22 @@ such as
 and <https://github.com/expertmm/Audiere/blob/master/doc/overview.txt>
 and <https://github.com/expertmm/Audiere/blob/master/doc/tutorial.txt>
 
-## Project Status
-NOTE: only forks are updated!
-such as:
-```
-cd $HOME/Downloads
-git clone https://github.com/expertmm/Audiere
-cd Audiere
-```
-
 ## Compiling on Windows with MSVC in 32-bit and 64-bit
 see MSVC 32-bit/64-bit builds at: https://github.com/SethRobinson/Audiere (eventually those changes will be merged into this fork hopefully)
 
-## Compiling with libtool (only needed if your *nix/bsd/MacOS system is missing the .so file)
 see also README.md at https://github.com/expertmm/Audiere
 
-### scons (original project used scons)
-```
-scons use_dumb=no
-```
+## libtool (as opposed to scons)
+### recommended for cross-platform building since:
+* .so file gets named and installed into your system properly
+* audiere-config gets installed so your project doesn't need manual linker flags, just `audiere-config -libs` which generates the flags for you
 
-### libtool (no scons)
-This method avoids scons completely--however, sudo make install doesn't put the resulting src/.libs/libaudiere-1.9.4.so in your system.
+### How to compile and install:
 * first install all your build tools used below
 * open terminal
 * cd to wherever you put the project such as `cd $HOME/Documents/GitHub/Audiere`
 * paste the following into terminal (excluding triple grave accents if you are using a text editor that sees them):
-
+  (these steps are needed until proper autoconf data is added to repo)
 ```
 chmod +x runme_before_automake
 ./runme_before_automake
@@ -62,19 +51,7 @@ make
 sudo make install
 ```
 
+## Code::Blocks How-to
 Building a project that depends on audiere, using Code::Blocks:
 Project, Build options, Linker settings, Other linker options: add `audiere-config --libs` including grave accents
 
-API:
-SOUND_BUFFERS is 15
-SOUND_SOURCES is 20
-
-Unicode filenames require an external library such as wx (the following is from <https://github.com/kg/Audiere/blob/master/examples/wxPlayer/DeviceFrame.cpp>):
-```C++
-#if wxUSE_UNICODE
-  wxCharBuffer buffFilename = filename.mb_str(wxConvUTF8);
-  audiere::SampleSourcePtr source = audiere::OpenSampleSource(buffFilename.data());
-#else
-  audiere::SampleSourcePtr source = audiere::OpenSampleSource(filename);
-#endif
-```
