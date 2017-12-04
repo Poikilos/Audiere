@@ -2,6 +2,12 @@
 
   expertmm's fork started at https://github.com/expertmm/Audiere from https://github.com/vancegroup/Audiere
   
+  tests/race/race.cpp: use cross-platform (conditionally implemented depending upon if defined _WIN32) best_sleep instead of windows.h and Sleep (otherwise prevents build of whole project)--based on <https://stackoverflow.com/questions/1658386/sleep-function-in-c>
+  
+  SConstruct: added HAVE_SPEEX condition and if speex.h is missing, don't try to compile with it (otherwise missing speex.h [having a non-VC6 build environment] prevents build)--this determines whether to include src/speexfile/speexfile.cpp, src/input_speex.cpp.
+  
+  SConstruct: added use_winmm param for scons (always turned off if win32) that affects HAVE_WINMM (comment used to say "nothing checks for this" (now something does). Bug is fixed where was added to "source" variable even before check for HAVE_WINMM case added it again.
+  
   moved license from doc/license.txt to LICENSE (so shows up on GitHub interface and is immediately visible)
   
   made changes suggested by autoconf:

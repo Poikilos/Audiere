@@ -88,8 +88,20 @@ if ARGUMENTS.get('use_dumb', 'yes') == 'yes':
 else:
     define("NO_DUMB")
 
-conf.env.Append(LIBS=['libspeex'])
-	
+if ARGUMENTS.has_key('use_winmm') and ARGUMENTS['use_winmm'] == True:
+    if sys.platform == 'win32':
+		define("HAVE_WINMM")
+    else:
+		ARGUMENTS['use_winmm'] = False
+else:
+    define("NO_WINMM")
+
+if conf.CheckHeader('speex.h'):
+	conf.env.Append(LIBS=['libspeex'])
+	define("HAVE_SPEEX")
+else:
+	define("NO_SPEEX")
+
 if ARGUMENTS.get('use_oss', 'yes') == 'yes':
     if not (conf.CheckHeader("unistd.h") and conf.CheckHeader("sys/soundcard.h")):
         print "Error: OSS support was not found. Either enable it, or rebuild with use_oss=no."
@@ -120,14 +132,12 @@ source = """
 	src/device.cpp
 	src/device_mixer.cpp
 	src/device_null.cpp
-        src/device_mm.cpp
         src/dumb_resample.cpp
 	src/file_ansi.cpp
 	src/input.cpp
 	src/input_aiff.cpp
 	src/input_mp3.cpp
 	src/input_wav.cpp
-        src/input_speex.cpp
 	src/loop_point_source.cpp
 	src/memory_file.cpp
 	src/mpaudec/bits.c
@@ -141,7 +151,6 @@ source = """
 	src/tone.cpp
 	src/utility.cpp
 	src/version.cpp
-        src/speexfile/speexfile.cpp
 """
 
 if sys.platform == 'win32':
@@ -153,6 +162,12 @@ else:
     source += '''
         src/timer_posix.cpp
         src/threads_posix.cpp
+    '''
+
+if isdef("HAVE_SPEEX"):
+	source += '''
+        src/input_speex.cpp
+        src/speexfile/speexfile.cpp
     '''
 
 if isdef("HAVE_FLAC"):
@@ -178,7 +193,7 @@ if isdef("HAVE_DSOUND"):
         src/dxguid.cpp
     """
 
-if isdef("HAVE_WINMM"): # NOTHING CHECKS FOR THIS YET
+if isdef("HAVE_WINMM"):
     source += " src/device_mm.cpp"
 
 env = conf.Finish()

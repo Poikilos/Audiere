@@ -29,6 +29,13 @@ see doc/dependencies.txt
 * latest GitHub fork was 2014 and didn't work with wx 3 (the later SethRobinson fork doesn't count--it only made changes for MSVC 32-bit & 64-bit compilation, and didn't fork from vancegroup who had done many fixes).
 
 ## Known issues
+* CMakeLists.txt has many TODOs that seem important, such as:
+  ```
+  if(NOT WIN32)
+    # TODO
+    # search for libcdaudio
+  endif()
+  ```
 * implement fixes for MSVC 32-bit & 64-bit compilation implemented in SethRobinson's fork of https://github.com/kg/Audiere (should have been forked from later fork but wasn't so full diff must be manually applied to current fork)
 * possible type-o in device_null.h (see "old changes noted during diffs" above)
 * requires oss (or emulation of /dev/dsp via alsa-oss) which is deprecated
