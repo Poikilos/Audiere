@@ -22,6 +22,20 @@ if [ ! -f "$git_bin_path" ]; then
   exit 2
 fi
 
+
+##CLONE_PARENT is not needed since release folder is used instead
+#CLONE_PARENT=../audiere-build-tmp
+#if [ -d "$CLONE_PARENT" ]; then
+#  rm -Rf "$CLONE_PARENT"
+#fi
+##mkdir "$CLONE_PARENT" 
+#cp -Rf "$START_FILES" "$CLONE_PARENT"
+#if [ ! -d "$CLONE_PARENT" ]; then
+#  echo "FAILED since cannot create '$CLONE_PARENT'. Make sure you have permission."
+#  exit 4
+#fi
+#cd $CLONE_PARENT
+
 #export CVSROOT=`cat CVS/Root`
 #echo
 #echo "Using CVSROOT: $CVSROOT"
@@ -30,21 +44,6 @@ fi
 # enter 'release' directory
 mkdir -p release || die
 cd release || die
-
-
-CLONE_PARENT=../audiere-build-tmp
-if [ -d "$CLONE_PARENT" ]; then
-  rm -Rf "$CLONE_PARENT"
-fi
-#mkdir "$CLONE_PARENT" 
-cp -Rf "$START_FILES" "$CLONE_PARENT"
-if [ ! -d "$CLONE_PARENT" ]; then
-  echo "FAILED since cannot create '$CLONE_PARENT'. Make sure you have permission."
-  exit 4
-fi
-
-cd $CLONE_PARENT
-#################### below takes place in the tmp build folder ####################
 
 # 'files' is where all of the files to be uploaded go
 FILES=files

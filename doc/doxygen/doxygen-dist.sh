@@ -29,7 +29,7 @@ archive() {
      cp -r html $BASE && \
      zip -r -q ../$BASE.zip $BASE && \
      tar cfj ../$BASE.tar.bz2 $BASE) || die
-  if [ -f $HHC ]; then
+  if [ -f "$HHC" ]; then
     (cd $AUDIENCE/html && "$HHC" index.hhp)
     mv $AUDIENCE/html/index.chm $BASE.chm || die
   else
