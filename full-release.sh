@@ -9,7 +9,7 @@ die() {
 }
 
 
-BASE=audiere-1.9.4
+BASE=audiere-1.10.1
 
 START_FILES=$(pwd)
 

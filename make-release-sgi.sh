@@ -5,7 +5,7 @@ die() {
     exit 1
 }
 
-VERSION=1.9.4
+VERSION=1.10.1
 NAME=audiere-$VERSION-sgi
 FILE=$NAME.tar.gz
 

@@ -1,4 +1,4 @@
-Bump the Version Number
+Bump the Version Number (using Semantic Versioning)
 
      The following files contain version information:
          configure.in
@@ -12,19 +12,20 @@ Bump the Version Number
          doc/doxygen/mainpage.doxy
          src/audiere.h
          src/audiere.rc
+           - in at least 4 places (including 2 in comma-separated form)!
          src/version.cpp
 
-
-Add "$VERSION release" to changelog.
+Add "$VERSION released." to changelog.
 
 
 Run tests with wxPlayer!!!
 
+NOTE: all build steps below seem to be done by full-release.sh now (correct me if I'm wrong: https://github.com/expertmm/Audiere)
 
 Build the VC6 Binary Release
 Build UNIX Release
 Build Doxygen Releases
-Build CVS snapshot tarball
+Build git version  # formerly: Build CVS snapshot tarball
 
     *) Run full-release.sh
 
@@ -33,8 +34,7 @@ Build the SGI Binary Release
     1) Check out a fresh copy from CVS into a temporary directory
     2) Run make-release-sgi.sh
 
-
-Upload the files to the SourceForge download section.
+Add a release tag on GitHub  # formerly: Upload the files to the SourceForge download section.
 
 
 Update the web site.

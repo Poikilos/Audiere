@@ -1,3 +1,9 @@
+2017.12.05
+
+  1.10.1 released.
+
+  Restored the former build process: ./full-release.sh which now works on linux not just Cygwin (fixed the script as well as minor/dependent build scripts: bootstrap, build.sh, doxygen-dist.sh).
+
 2017.12.03
 
   expertmm's fork started at https://github.com/expertmm/Audiere from https://github.com/vancegroup/Audiere

@@ -2,7 +2,7 @@
  * @file
  *
  * Audiere Sound System
- * Version 1.9.4
+ * Version 1.10.1
  * (c) 2001-2003 Chad Austin
  *
  * This API uses principles explained at

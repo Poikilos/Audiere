@@ -19,7 +19,7 @@ die() {
 }
 
 archive() {
-    VERSION=1.9.4
+    VERSION=1.10.1
     AUDIENCE=$1
     BASE=audiere-$VERSION-$AUDIENCE-doxygen
 
