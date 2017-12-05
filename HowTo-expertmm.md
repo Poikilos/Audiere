@@ -12,7 +12,8 @@ and <https://github.com/expertmm/Audiere/blob/master/doc/overview.txt>
 and <https://github.com/expertmm/Audiere/blob/master/doc/tutorial.txt>
 
 ## Compiling on Windows with MSVC in 32-bit and 64-bit
-see MSVC 32-bit/64-bit builds at: https://github.com/SethRobinson/Audiere (eventually those changes will be merged into this fork hopefully)
+* You should probably use scons under cygwin (correct me if I'm wrong).
+* see MSVC 32-bit/64-bit builds at: https://github.com/SethRobinson/Audiere (eventually those changes will be merged into this fork hopefully)
 
 see also README.md at https://github.com/expertmm/Audiere
 

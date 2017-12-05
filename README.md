@@ -6,14 +6,23 @@ I only made this modernized fork since I wrote a whole sound implementation base
 
 ## Usage
 * see doc/tutorial.txt
-* for Code::Blocks notes, see HowTo-expertmm.md
+* for Code::Blocks notes (setting up projects to use Audiere as a dependency), see HowTo-expertmm.md
 
 
 ## Compiling
+* Make sure make dependencies are installed
+  (for build tools, your linux distro probably has a package group for building similar to first line of each set of steps below):
+	* Debian or Ubuntu (this wasn't tested, so you may need repos or specific PPAs enabled for this to work):
+		* `sudo apt-get update && sudo apt-get install build-essentials`
+		* `sudo apt-get install doxygen`
+	* arch:
+		* do not do the following command if you already need and have multilib-devel metapackage from AUR: `sudo pacman -Syu base-devel  # installed by default`
+		* `sudo pacman -Syu doxygen`
+	* formerly, hcc was required for full-release.sh, but  `yaourt -Sy hcc` wasn't working so I made hcc optional (changed doxygen-dist.sh)
 * see also doc/release-howto.txt
 * see also examples/wxPlayer/IMPORTANT.txt
-* for compiling on *nix/*bsd/MacOS, see HowTo-expertmm.md for now
-* If you want to use scons on non-Windows platform (not recommended) and you don't have libdumb (as expected):
+* for compiling cross-platform (non-Windows), see HowTo-expertmm.md
+* If you want to use scons on non-Windows platform (not recommended for cross-platform) and you don't have libdumb (as expected):
 `scons use_dumb=no`
 	* NOTE: using scons will cause so file's name to not have -1.9.4 appended, resulting in programs not running. You would then have to manually rename or link to it and put it in your system with something like `LD_LIBRARY_PATH=/usr/local/lib/libaudiere-1.9.4.so && ldconfig`
 
