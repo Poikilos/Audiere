@@ -5,11 +5,11 @@ HHC="C:/Program Files/HTML Help Workshop/hhc"
 hhc_path=$(command -v chmcmd)
 chmcmd_path=$(command -v chmcmd)
 
-if [ ! -f $hhc_path ]; then
-  HHC=$hhc_path
+if [ -f "$hhc_path" ]; then
+  HHC="$hhc_path"
 else
-  if [ ! -f $chmcmd_path ]; then
-    HHC=$chmcmd_path
+  if [ -f "$chmcmd_path" ]; then
+    HHC="$chmcmd_path"
   fi
 fi
 
