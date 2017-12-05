@@ -1,4 +1,3 @@
-
 _ReSharper.*
 *.sdf
 *.opensdf
@@ -9,3 +8,4 @@ _ReSharper.*
 *.pch
 Debug
 Release
+release
