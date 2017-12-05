@@ -119,10 +119,14 @@ echo "Building Doxygen release..."
 echo
 
 (cd $DOXYGEN_FILES/doc/doxygen && ./doxygen-dist.sh) || die
-cp $DOXYGEN_FILES/doc/doxygen/$BASE-users-doxygen.chm     "$FILES" || die
+if [ -f "$DOXYGEN_FILES/doc/doxygen/$BASE-users-doxygen.chm" ]; then
+  cp $DOXYGEN_FILES/doc/doxygen/$BASE-users-doxygen.chm     "$FILES" || die
+fi
 cp $DOXYGEN_FILES/doc/doxygen/$BASE-users-doxygen.zip     "$FILES" || die
 cp $DOXYGEN_FILES/doc/doxygen/$BASE-users-doxygen.tar.bz2 "$FILES" || die
-cp $DOXYGEN_FILES/doc/doxygen/$BASE-devel-doxygen.chm     "$FILES" || die
+if [ -f "$DOXYGEN_FILES/doc/doxygen/$BASE-devel-doxygen.chm" ]; then
+  cp $DOXYGEN_FILES/doc/doxygen/$BASE-devel-doxygen.chm     "$FILES" || die
+fi
 cp $DOXYGEN_FILES/doc/doxygen/$BASE-devel-doxygen.zip     "$FILES" || die
 cp $DOXYGEN_FILES/doc/doxygen/$BASE-devel-doxygen.tar.bz2 "$FILES" || die
 
