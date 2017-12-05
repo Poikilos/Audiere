@@ -15,6 +15,13 @@ START_FILES=$(pwd)
 
 GIT_URL=https://github.com/expertmm/Audiere.git
 
+
+git_bin_path=$(command -v git)
+if [ ! -f "$git_bin_path" ]; then
+  echo "Release failed since git was not installed."
+  exit 2
+fi
+
 #export CVSROOT=`cat CVS/Root`
 #echo
 #echo "Using CVSROOT: $CVSROOT"
@@ -29,16 +36,11 @@ CLONE_PARENT=../audiere-build-tmp
 if [ -d "$CLONE_PARENT" ]; then
   rm -Rf "$CLONE_PARENT"
 fi
-mkdir "$CLONE_PARENT"
+#mkdir "$CLONE_PARENT" 
+cp -Rf "$START_FILES" "$CLONE_PARENT"
 if [ ! -d "$CLONE_PARENT" ]; then
   echo "FAILED since cannot create '$CLONE_PARENT'. Make sure you have permission."
   exit 4
-fi
-
-git_bin_path=$(command -v git)
-if [ ! -f "$git_bin_path" ]; then
-  echo "Release failed since git was not installed."
-  exit 2
 fi
 
 cd $CLONE_PARENT

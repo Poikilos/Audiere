@@ -8,18 +8,18 @@ mkdir -p config
 #region GNUify
 #see also etc/runme_before_automake
 if [ ! -f NEWS ]; then echo "see https://github.com/expertmm/Audiere" > NEWS; fi
-if [ ! -f README ]; then ln -s README.md README; fi
-if [ ! -f AUTHORS ]; then ln -s doc/authors.txt AUTHORS; fi
-if [ ! -f ChangeLog ]; then ln -s doc/changelog.txt ChangeLog; fi
-if [ ! -f COPYING ]; then ln -s LICENSE COPYING; fi
-if [ ! -f doc/license.txt ]; then ln -s LICENSE doc/license.txt; fi
+if [ ! -f README ]; then cp README.md README; fi
+if [ ! -f AUTHORS ]; then cp doc/authors.txt AUTHORS; fi
+if [ ! -f ChangeLog ]; then cp doc/changelog.txt ChangeLog; fi
+if [ ! -f COPYING ]; then cp LICENSE COPYING; fi
+if [ ! -f doc/license.txt ]; then cp LICENSE doc/license.txt; fi
 #endregion GNUify
 
 UNAME=`uname`
 if [ "$UNAME" == "Darwin" ]; then
-        glibtoolize --force --copy
+  glibtoolize --force --copy
 else
-        libtoolize --force --copy
+  libtoolize --force --copy
 fi
 aclocal  # scans configure.ac and create an aclocal.m4 file 
 # automake --add-missing would add a COPYING file, but let's not do that.
