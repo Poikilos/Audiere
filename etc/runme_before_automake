@@ -1,4 +1,6 @@
 #!/bin/sh
+echo this functionality was moved to GNUify region of bootstrap script
+exit 1
 if [ ! -f NEWS ]; then echo "https://github.com/expertmm/Audiere" > NEWS; fi
 
 #if [ ! -f README ]; then

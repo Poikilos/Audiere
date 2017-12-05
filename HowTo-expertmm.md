@@ -22,30 +22,14 @@ see also README.md at https://github.com/expertmm/Audiere
 * audiere-config gets installed so your project doesn't need manual linker flags, just `audiere-config -libs` which generates the flags for you
 
 ### How to compile and install:
-* first install all your build tools used below
-* open terminal
+* First install all your build tools used below
+* Open terminal
 * cd to wherever you put the project such as `cd $HOME/Documents/GitHub/Audiere`
-* paste the following into terminal (excluding triple grave accents if you are using a text editor that sees them):
+* Paste the commands below into terminal (excluding triple grave accents if you are using a text editor that sees them):
   (these steps are needed until proper autoconf data is added to repo)
+	* Before you try the commands below, consider running `full-release.sh` instead.
 ```
-chmod +x runme_before_automake
-./runme_before_automake
-libtoolize
-aclocal  # scans configure.ac and create an aclocal.m4 file 
-# automake --add-missing will add a COPYING file, but let's not do that.
-if [ ! -f COPYING ]; then
-  cp LICENSE COPYING
-fi
-echo "change wxOPEN to wxFC_OPEN in DeviceFrame.cpp and MIDIDeviceFrame.cpp" >> ChangeLog
-echo "make inclusion and uses of windows.h in src/device_mm.cpp optional" >> ChangeLog
-automake --add-missing
-#TODO--resolve: warning: 'INCLUDES' is the old name for 'AM_CPPFLAGS' (or '*_CPPFLAGS')
-#TODO--resolve: Makefile.am:25: warning: source file 'speexfile/speexfile.cpp' is in a subdirectory,
-#               src/Makefile.am:25: but option 'subdir-objects' is disabled
-# * speex is only included if present on your system, so you may have to remove it to use this howto until issue is resolved.
-autoreconf
-autoreconf --install  # (generates Makefile.in)
-autoconf  # (generates configure script)
+./bootstrap
 ./configure
 make
 sudo make install

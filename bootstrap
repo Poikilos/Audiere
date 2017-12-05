@@ -1,9 +1,19 @@
 #!/bin/sh
-
+#set -e causes the shell to exit if any subcommand or pipeline returns a non-zero status.
 set -e
+#set -x enables a mode of the shell where all executed commands are printed to the terminal.
 set -x
 mkdir -p config
-aclocal
+
+#region GNUify
+#see also etc/runme_before_automake
+if [ ! -f NEWS ]; then echo "see https://github.com/expertmm/Audiere" > NEWS; fi
+if [ ! -f README ]; then ln -s README.md README; fi
+if [ ! -f AUTHORS ]; then ln -s doc/authors.txt AUTHORS; fi
+if [ ! -f ChangeLog ]; then ln -s doc/changelog.txt ChangeLog; fi
+if [ ! -f COPYING ]; then ln -s LICENSE COPYING; fi
+if [ ! -f doc/license.txt ]; then ln -s LICENSE doc/license.txt; fi
+#endregion GNUify
 
 UNAME=`uname`
 if [ "$UNAME" == "Darwin" ]; then
@@ -11,6 +21,19 @@ if [ "$UNAME" == "Darwin" ]; then
 else
         libtoolize --force --copy
 fi
-
-automake --foreign --add-missing --copy
-autoconf
+aclocal  # scans configure.ac and create an aclocal.m4 file 
+# automake --add-missing would add a COPYING file, but let's not do that.
+if [ ! -f COPYING ]; then
+  cp LICENSE COPYING
+fi
+#--foreign is no longer needed due to GNUify region above
+#automake --foreign --add-missing --copy
+#--copy "When used with --add-missing, causes installed files to be copied. The default is to make a symbolic link."
+automake --add-missing --copy
+#TODO--resolve: warning: 'INCLUDES' is the old name for 'AM_CPPFLAGS' (or '*_CPPFLAGS')
+#TODO--resolve: Makefile.am:25: warning: source file 'speexfile/speexfile.cpp' is in a subdirectory,
+#               src/Makefile.am:25: but option 'subdir-objects' is disabled
+# * speex is only included if present on your system, so you may have to remove it to use this howto until issue is resolved.
+autoreconf
+autoreconf --install  # (generates Makefile.in)
+autoconf  # (generates configure script)
