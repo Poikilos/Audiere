@@ -3,6 +3,12 @@ If you need a Windows build, you can use SethRobinson Windows binaries.
 This fork is based on vancegroup's fork of Chad Austin's Audiere (see "Reasons for Fork" below).
 I only made this modernized fork since I wrote a whole sound implementation based on it before finding out that the linux package was based on the (VERY) old and deprecated sourceforge release version 1.9.4. However, maybe this will bring the project back to life, as there are several others on GitHub (and AUR) doing some great work on Audiere (so far, the only central location for that work is here).
 
+## Download
+* Linux download is available on [releases](https://github.com/expertmm/Audiere/releases) page.
+
+## Differences from original sourceforge version
+* too many to name. See release notes for all releases especially first (1.10.1): <https://github.com/expertmm/Audiere/releases>
+
 
 ## Usage
 * see doc/tutorial.txt
