@@ -4,7 +4,7 @@ This fork is based on vancegroup's fork of Chad Austin's Audiere (see "Reasons f
 I only made this modernized fork since I wrote a whole sound implementation based on it before finding out that the linux package was based on the (VERY) old and deprecated sourceforge release version 1.9.4. However, maybe this will bring the project back to life, as there are several others on GitHub (and AUR) doing some great work on Audiere (so far, the only central location for that work is here).
 
 ## Download
-* Linux download is available on [releases](https://github.com/expertmm/Audiere/releases) page.
+* Linux download is available on [releases](https://github.com/expertmm/Audiere/releases) page. You'll have to download the appropriate tar.gz file then use "Compiling" instructions below.
 
 ## Differences from original sourceforge version
 * too many to name. See release notes for all releases especially first (1.10.1): <https://github.com/expertmm/Audiere/releases>
@@ -27,7 +27,15 @@ I only made this modernized fork since I wrote a whole sound implementation base
 	* formerly, hcc was required for full-release.sh, but  `yaourt -Sy hcc` wasn't working so I made hcc optional (changed doxygen-dist.sh)
 * see also doc/release-howto.txt
 * see also examples/wxPlayer/IMPORTANT.txt
-* for compiling cross-platform (non-Windows), see HowTo-expertmm.md
+* for compiling cross-platform (non-Windows)
+	* if cloned from git, see HowTo-expertmm.md
+	* if downloaded tar.gz release, this should work:
+	  ```
+	  ./bootstrap
+	  ./configure
+	  make
+	  sudo make install
+	  ```
 * If you want to use scons on non-Windows platform (not recommended for cross-platform) and you don't have libdumb (as expected):
 `scons use_dumb=no`
 	* NOTE: using scons will cause so file's name to not have -1.9.4 appended, resulting in programs not running. You would then have to manually rename or link to it and put it in your system with something like `LD_LIBRARY_PATH=/usr/local/lib/libaudiere-1.9.4.so && ldconfig`
