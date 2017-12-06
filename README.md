@@ -29,7 +29,7 @@ I only made this modernized fork since I wrote a whole sound implementation base
 * see also examples/wxPlayer/IMPORTANT.txt
 * for compiling cross-platform (non-Windows)
 	* if cloned from git, see HowTo-expertmm.md
-	* if downloaded tar.gz release, this should work:
+	* if downloaded a release version tar.gz from [releases](https://github.com/expertmm/Audiere/releases), this should work:
 	  ```
 	  ./bootstrap
 	  ./configure
