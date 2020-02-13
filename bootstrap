@@ -7,7 +7,7 @@ mkdir -p config
 
 #region GNUify
 #see also etc/runme_before_automake
-if [ ! -f NEWS ]; then echo "see https://github.com/expertmm/Audiere" > NEWS; fi
+if [ ! -f NEWS ]; then echo "see https://github.com/poikilos/Audiere" > NEWS; fi
 if [ ! -f README ]; then cp README.md README; fi
 if [ ! -f AUTHORS ]; then cp doc/authors.txt AUTHORS; fi
 if [ ! -f ChangeLog ]; then cp doc/changelog.txt ChangeLog; fi
@@ -21,7 +21,7 @@ if [ "$UNAME" == "Darwin" ]; then
 else
   libtoolize --force --copy
 fi
-aclocal  # scans configure.ac and create an aclocal.m4 file 
+aclocal  # scans configure.ac and create an aclocal.m4 file
 # automake --add-missing would add a COPYING file, but let's not do that.
 if [ ! -f COPYING ]; then
   cp LICENSE COPYING

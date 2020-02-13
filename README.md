@@ -4,15 +4,15 @@ This fork is based on vancegroup's fork of Chad Austin's Audiere (see "Reasons f
 I only made this modernized fork since I wrote a whole sound implementation based on it before finding out that the linux package was based on the (VERY) old and deprecated sourceforge release version 1.9.4. However, maybe this will bring the project back to life, as there are several others on GitHub (and AUR) doing some great work on Audiere (so far, the only central location for that work is here).
 
 ## Download
-* Linux download is available on [releases](https://github.com/expertmm/Audiere/releases) page. You'll have to download the appropriate tar.gz file then use "Compiling" instructions below.
+* Linux download is available on [releases](https://github.com/poikilos/Audiere/releases) page. You'll have to download the appropriate tar.gz file then use "Compiling" instructions below.
 
 ## Differences from original sourceforge version
-* too many to name. See release notes for all releases especially first (1.10.1): <https://github.com/expertmm/Audiere/releases>
+* There are too many to name. See release notes for all releases especially first (1.10.1): <https://github.com/poikilos/Audiere/releases>
 
 
 ## Usage
 * see doc/tutorial.txt
-* for Code::Blocks notes (setting up projects to use Audiere as a dependency), see HowTo-expertmm.md
+* for Code::Blocks notes (setting up projects to use Audiere as a dependency), see HowTo-poikilos.md
 
 
 ## Compiling
@@ -28,8 +28,8 @@ I only made this modernized fork since I wrote a whole sound implementation base
 * see also doc/release-howto.txt
 * see also examples/wxPlayer/IMPORTANT.txt
 * for compiling cross-platform (non-Windows)
-	* if cloned from git, see HowTo-expertmm.md
-	* if downloaded a release version tar.gz from [releases](https://github.com/expertmm/Audiere/releases), this should work:
+	* if cloned from git, see HowTo-poikilos.md
+	* if downloaded a release version tar.gz from [releases](https://github.com/poikilos/Audiere/releases), this should work:
 	  ```
 	  ./bootstrap
 	  ./configure

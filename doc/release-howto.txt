@@ -20,7 +20,7 @@ Add "$VERSION released." to changelog.
 
 Run tests with wxPlayer!!!
 
-NOTE: all build steps below seem to be done by full-release.sh now (correct me if I'm wrong: https://github.com/expertmm/Audiere)
+NOTE: all build steps below seem to be done by full-release.sh now (correct me if I'm wrong: https://github.com/poikilos/Audiere)
 
 Build the VC6 Binary Release
 Build UNIX Release

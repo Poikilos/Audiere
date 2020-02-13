@@ -8,4 +8,4 @@ kg              https://github.com/kg/Audiere
 flibitijibibo   https://github.com/flibitijibibo/Audiere
 vancegroup      https://github.com/vancegroup/Audiere
 allencch (AUR)  https://aur.archlinux.org/packages/audiere/
-expertmm        https://github.com/expertmm/Audiere
+poikilos        https://github.com/poikilos/Audiere

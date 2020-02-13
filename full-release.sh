@@ -13,7 +13,7 @@ BASE=audiere-1.10.1
 
 START_FILES=$(pwd)
 
-GIT_URL=https://github.com/expertmm/Audiere.git
+GIT_URL=https://github.com/poikilos/Audiere.git
 
 
 git_bin_path=$(command -v git)
@@ -28,7 +28,7 @@ fi
 #if [ -d "$CLONE_PARENT" ]; then
 #  rm -Rf "$CLONE_PARENT"
 #fi
-##mkdir "$CLONE_PARENT" 
+##mkdir "$CLONE_PARENT"
 #cp -Rf "$START_FILES" "$CLONE_PARENT"
 #if [ ! -d "$CLONE_PARENT" ]; then
 #  echo "FAILED since cannot create '$CLONE_PARENT'. Make sure you have permission."
@@ -64,7 +64,7 @@ if [ -d $MASTER_FILES ]; then
   rm -Rf $MASTER_FILES
 fi
 git clone $GIT_URL
-if [ -d Audiere ]; then 
+if [ -d Audiere ]; then
   mv Audiere $MASTER_FILES
 else
   echo "ERROR: release failed since git couldn't clone $GIT_URL"
